@@ -1,4 +1,3 @@
-# WARNING: MESSY CODE. WILL CLEAN UP AND REFACTOR WHEN POSSIBLE. #
 def game_hash
 hash = {
 	:home => {
@@ -37,8 +36,8 @@ end
 #
 
 def num_points_scored(player_name)
-	val1 = game_hash.reduce(player_name) { |x, (y, z)|
-		val2 = z.values[2].reduce(0) { |x2, y2|
+	game_hash.reduce(player_name) { |x, (y, z)|
+		z.values[2].reduce(0) { |x2, y2|
 			y2.select { |k, v|
 				if k == player_name
 					return v[:points]
@@ -48,9 +47,11 @@ def num_points_scored(player_name)
 	}
 end
 
+
+
 def shoe_size(player_name)
-	val1 = game_hash.reduce(player_name) { |x, (y, z)|
-		val2 = z.values[2].reduce(0) { |x2, y2|
+	game_hash.reduce(player_name) { |x, (y, z)|
+		z.values[2].reduce(0) { |x2, y2|
 			y2.select { |k, v|
 				if k == player_name
 					return v[:shoe]
@@ -60,8 +61,10 @@ def shoe_size(player_name)
 	}
 end
 
+
+
 def team_colors(team_name)
-	val1 = game_hash.reduce(team_name) { |x, (y, z) |
+	game_hash.reduce(team_name) { |x, (y, z) |
 		z.select {|k, v|
 			if v == team_name
 				return z.values_at(:colors).flatten
@@ -70,57 +73,60 @@ def team_colors(team_name)
 	}
 end
 
+
+
 def team_names
 arr = []
-	val1 = game_hash.reduce([]) { |x, (y, z)|
+	game_hash.reduce([]) { |x, (y, z)|
 		z.select { |k, v| arr << z[:team_name] }
 	}
 return arr.uniq
 end
 
+
+
 def player_numbers(team_name)
 arr = []
 
 val1 = game_hash.reduce([]) { |x, (y, z) |
-
-val3 = z[:team_name]
-
 	val2 = z.reduce([]) { |x2, (y2, z2)|
 		x2 = z2
 	x2
 	}
-		val2.reduce([]) { |x3, y3|
-
-			y3.values.each { |e|
-				if val3 == team_name
-					arr << e[:number]
-				end
-			}
+	val2.reduce([]) { |x3, y3|
+		y3.values.each { |e|
+			if z[:team_name] == team_name
+				arr << e[:number]
+			end
 		}
-
+	}
 x = arr.sort
 x
 }
 return val1
 end
 
+
+
 def player_stats(player_name)
 	game_hash.reduce({}) { |x, (y, z)|
-		val1 = z[:players].select { |k, v|
-		if k.keys[0] == player_name
-			return k.values_at(player_name)[0]
-		end
+		z[:players].select { |k, v|
+			if k.keys[0] == player_name
+				return k.values_at(player_name)[0]
+			end
 		}
 	}
 end
+
+
 
 def big_shoe_rebounds
 shoe_arr = []
 	game_hash.reduce({}) { |x, (y, z)|
 		z[:players].select { |k|
-				k.values.select { |k2|
-					shoe_arr << k2[:shoe]
-				}
+			k.values.select { |k2|
+				shoe_arr << k2[:shoe]
+			}
 		}
 		z[:players].select { |k3|
 			k3.values.select { |k4|
