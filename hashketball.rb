@@ -293,7 +293,7 @@ def long_name_steals_a_ton?
 
 		player_stats = hash[1][:players]
 
-		player_stats.each { |players|
+		player_stats.select { |players|
 
 			name = players.keys[0]
 			name_length = players.keys[0].length
@@ -308,7 +308,7 @@ def long_name_steals_a_ton?
 
 		player_stats = hash[1][:players]
 
-		player_stats.each { |players|
+		player_stats.select { |players|
 
 			name = players.keys[0]
 			num_steals = players.values[0][:steals]
