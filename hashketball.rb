@@ -188,3 +188,143 @@ def big_shoe_rebounds
 
 return search
 end
+
+
+
+def most_points_scored
+
+	parse = game_hash.reduce([]) { |arr, hash|
+
+		player_stats = hash[1][:players]
+
+		player_stats.select { |players|
+
+			stats = players.values[0]
+
+			arr << stats[:points]
+
+		}
+
+	arr
+	}
+
+	search = game_hash.reduce("") { |str, hash|
+
+		player_stats = hash[1][:players]
+
+		player_stats.select { |players|
+
+			most_points = parse.sort[-1]
+			stats = players.values[0]
+			name = players.keys[0]
+
+			if most_points == stats[:points]
+				str = name
+			end
+		}
+
+	str
+	}
+
+return search
+end
+
+
+
+def winning_team
+
+	score = game_hash.reduce({}) { |memo, hash|
+
+		player_stats = hash[1][:players]
+		teams = hash[1][:team_name]
+		total = 0
+
+		player_stats.select { |players|
+
+			stats = players.values[0]
+
+			total += stats[:points]
+		}
+
+		memo[teams] = total
+
+	memo
+	}
+
+	home_team_name = score.keys[0]
+	away_team_name = score.keys[1]
+
+	home_team_score = score.values[0]
+	away_team_score = score.values[1]
+
+return home_team_score > away_team_score ? home_team_name : away_team_name
+end
+
+
+
+def player_with_longest_name
+
+	search = game_hash.reduce({}) { |memo, hash|
+
+		player_stats = hash[1][:players]
+
+		player_stats.each { |players|
+
+			name = players.keys[0]
+			name_length = players.keys[0].length
+
+			memo[name] = name_length
+		}
+
+	memo
+	}
+
+	sorted = search.sort_by {|key, value| value }
+	longest_name = sorted[-1][0]
+
+return longest_name
+end
+
+
+
+def long_name_steals_a_ton?
+
+	search_names = game_hash.reduce({}) { |memo, hash|
+
+		player_stats = hash[1][:players]
+
+		player_stats.each { |players|
+
+			name = players.keys[0]
+			name_length = players.keys[0].length
+
+			memo[name] = name_length
+		}
+
+	memo
+	}
+
+	search_steals = game_hash.reduce({}) { |memo, hash|
+
+		player_stats = hash[1][:players]
+
+		player_stats.each { |players|
+
+			name = players.keys[0]
+			players.values[0][:steals]
+			num_steals = players.values[0][:steals]
+
+			memo[name] = num_steals
+		}
+
+	memo
+	}
+
+	sorted_names = search_names.sort_by {|key, value| value }
+	sorted_steals = search_steals.sort_by {|key, value| value }
+
+	longest_name = sorted_names[-1][0]
+	most_steals = sorted_steals[-1][0]
+
+return most_steals == longest_name
+end
