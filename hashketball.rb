@@ -311,7 +311,6 @@ def long_name_steals_a_ton?
 		player_stats.each { |players|
 
 			name = players.keys[0]
-			players.values[0][:steals]
 			num_steals = players.values[0][:steals]
 
 			memo[name] = num_steals
