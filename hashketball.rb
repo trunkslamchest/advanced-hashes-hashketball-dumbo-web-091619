@@ -268,7 +268,7 @@ def player_with_longest_name
 
 		player_stats = hash[1][:players]
 
-		player_stats.each { |players|
+		player_stats.select { |players|
 
 			name = players.keys[0]
 			name_length = players.keys[0].length
