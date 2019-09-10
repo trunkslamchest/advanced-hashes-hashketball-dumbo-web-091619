@@ -117,7 +117,7 @@ def player_numbers(team_name)
 		team_stats = hash[1]
 		player_stats = team_stats[:players]
 
-		player_stats.each { |players|
+		player_stats.select { |players|
 
 		  player_stat_cat = players.values[0]
 
@@ -268,7 +268,7 @@ def player_with_longest_name
 
 		player_stats = hash[1][:players]
 
-		player_stats.each { |players|
+		player_stats.select { |players|
 
 			name = players.keys[0]
 			name_length = players.keys[0].length
@@ -293,7 +293,7 @@ def long_name_steals_a_ton?
 
 		player_stats = hash[1][:players]
 
-		player_stats.each { |players|
+		player_stats.select { |players|
 
 			name = players.keys[0]
 			name_length = players.keys[0].length
@@ -308,10 +308,9 @@ def long_name_steals_a_ton?
 
 		player_stats = hash[1][:players]
 
-		player_stats.each { |players|
+		player_stats.select { |players|
 
 			name = players.keys[0]
-			players.values[0][:steals]
 			num_steals = players.values[0][:steals]
 
 			memo[name] = num_steals
