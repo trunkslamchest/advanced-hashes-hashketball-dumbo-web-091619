@@ -117,7 +117,7 @@ def player_numbers(team_name)
 		team_stats = hash[1]
 		player_stats = team_stats[:players]
 
-		player_stats.each { |players|
+		player_stats.select { |players|
 
 		  player_stat_cat = players.values[0]
 
